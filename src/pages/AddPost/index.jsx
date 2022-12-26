@@ -57,13 +57,13 @@ export const AddPost = () => {
       }
 
       const { data } = isEditing ?
-       await axios.patch(`/posts/${id}`, fields)
+       await axios.patch(`/post/${id}`, fields)
        :
-       await axios.post('/posts', fields);
+       await axios.post('/post', fields);
 
       const _id = isEditing ? id :data._id;
 
-      navigate(`/posts/${_id}`);
+      navigate(`/post/${_id}`);
       
       setLoading(false);
     } catch (err) {
@@ -74,7 +74,7 @@ export const AddPost = () => {
 
   React.useEffect(() => {
     if (id) {
-      axios.get(`/posts/${id}`).then(({ data }) => {
+      axios.get(`/post/${id}`).then(({ data }) => {
         setTitle(data.title);
         setText(data.text);
         setImageUrl(data.imageUrl);

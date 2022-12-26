@@ -8,7 +8,7 @@ export const fetchPosts = createAsyncThunk('/posts/fetchPosts', async () => {
 });
 
 export const fetchPostsOnPage = createAsyncThunk('/posts/fetchPostsOnPage', async (page) => {
-    const { data } = await axios.get(`/post/${page}`);
+    const { data } = await axios.get(`/posts/${page}`);
     return data;
 });
 
@@ -18,12 +18,12 @@ export const fetchTags = createAsyncThunk('/posts/fetchTags', async () => {
 });
 
 export const fetchPostsByTag = createAsyncThunk('/posts/fetchPostsByTag', async (tag) => {
-    const { data } = await axios.get(`/tags/${tag}`);
+    const { data } = await axios.get(`/tag/${tag}`);
     return data;
 });
 
 export const fetchRemovePost = createAsyncThunk('/posts/fetchRemovePost', async (id) => 
-    await axios.delete(`/posts/${id}`)
+    await axios.delete(`/post/${id}`)
 );
 
 const initialState = {
