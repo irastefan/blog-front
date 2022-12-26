@@ -22,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/posts/:id' element={<FullPost />} />
+          <Route path='/post/:page' element={<Home />} />
           <Route path='/posts/:id/edit' element={<AddPost />} />
           <Route path='/tags/:tag' element={<Home />} />
           <Route path='/add-post' element={<AddPost />} />

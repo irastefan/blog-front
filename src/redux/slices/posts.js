@@ -7,6 +7,11 @@ export const fetchPosts = createAsyncThunk('/posts/fetchPosts', async () => {
     return data;
 });
 
+export const fetchPostsOnPage = createAsyncThunk('/posts/fetchPostsOnPage', async (page) => {
+    const { data } = await axios.get(`/post/${page}`);
+    return data;
+});
+
 export const fetchTags = createAsyncThunk('/posts/fetchTags', async () => {
     const { data } = await axios.get('/tags');
     return data;
@@ -46,6 +51,19 @@ const postsSlice = createSlice({
             state.posts.status = 'loaded';
         },
         [fetchPosts.rejected]: (state, action) => {
+            state.posts.items = [];
+            state.posts.status = 'error';
+        },
+
+        [fetchPostsOnPage.pending]: (state) => {
+            state.posts.items = [];
+            state.posts.status = 'loading';
+        },
+        [fetchPostsOnPage.fulfilled]: (state, action) => {
+            state.posts.items = action.payload;
+            state.posts.status = 'loaded';
+        },
+        [fetchPostsOnPage.rejected]: (state, action) => {
             state.posts.items = [];
             state.posts.status = 'error';
         },

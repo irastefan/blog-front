@@ -8,7 +8,7 @@ import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, fetchTags, fetchPostsByTag } from '../redux/slices/posts';
+import { fetchPosts, fetchTags, fetchPostsByTag, fetchPostsOnPage } from '../redux/slices/posts';
 
 import { useParams } from "react-router-dom";
 
@@ -19,16 +19,19 @@ export const Home = () => {
   let isPostLoading = posts.status === 'loading';
   let isTagsLoading = tags.status === 'loading';
 
-  const { tag } = useParams();
+  const { tag, page } = useParams();
+  console.log(tag, page, posts)
 
   useEffect(() => {
     if (tag) {
       dispatch(fetchPostsByTag(tag));
-    } else{
+    } else if (page) {
+      dispatch(fetchPostsOnPage(page));
+    } else {
       dispatch(fetchPosts());
     }
     dispatch(fetchTags());
-  }, [tag]);
+  }, [tag, page]);
 
   return (
     <>
